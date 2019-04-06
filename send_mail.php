@@ -16,9 +16,19 @@
 
 
 
+//Checking Email is already exist or not using SQL query.
+    // $mailto = 'aaravonly4you@gmail.com';
+    // $mailSub = 'hiiitest ';
+    // $mailMsg = 'hello';
+
+
    require 'PHPMailer-master/PHPMailerAutoload.php';
    $mail = new PHPMailer();
  
+   // new 2 line code for wokring 
+   $mail->IsSMTP();
+   $mail->SMTPAuth = true;
+
    $mail ->SMTPDebug = 0;
    $mail ->SMTPAuth = true;
    $mail ->SMTPSecure = 'ssl';
