@@ -7,13 +7,45 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
+
+
+
+// // taking data form javascirpt
+
+// $json = file_get_contents('php://input');
+
+// // decoding the received JSON and store into $obj variable.
+// $obj = json_decode($json,true);
+
+// //Checking Email is already exist or not using SQL query.
+// $mailto = $obj['mail_to'];
+// $mailSub = $obj['mail_sub'];
+// $mailMsg = $obj['mail_msg'];
+
+
+$mailto = 'aaravonly4you@gmail.com';
+$mailSub = "hi";
+$mailMsg = "hi";
+
+$Username = "javaaprimer123@gmail.com";
+$Password = "java123help";
+
+
+
 // Instantiation and passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = 2;                                       // Enable verbose debug output
-    // $mail->isSMTP();                   //comment it if your are using godaday package                         // Set mailer to use SMTP
+    $mail->SMTPDebug = 2;      // Enable verbose debug output
+
+
+                                     
+    // $mail->isSMTP();                   //comment it if your are using godaday package
+                             // Set mailer to use SMTP
+    
+
+
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
 
    $mail ->SMTPSecure = 'ssl';
@@ -24,19 +56,19 @@ try {
 
 
 
-   $mail ->Username = "javaaprimer123@gmail.com";
+   $mail ->Username = $Username;
 
-   $mail ->Password = "java123help";
+   $mail ->Password = $Password;
 
-   $mail ->SetFrom("javaaprimer123@gmail.com");
+   $mail ->SetFrom($Username);
 
-   $mail ->AddAddress('aaravonly4you@gmail.com');
+   $mail ->AddAddress($mailto);
 
 
     // $mail->Host       = 'smtp1.example.com;smtp2.example.com';  // Specify main and backup SMTP servers
 
-    // $mail->Username   = 'user@example.com';                     // SMTP username
-    // $mail->Password   = 'secret';                               // SMTP password
+    // $mail->Username   = 'user@example.com';                     // SMTP Username
+    // $mail->Password   = 'secret';                               // SMTP Password
     // $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
     // $mail->Port       = 587;                                    // TCP port to connect to
 
@@ -57,11 +89,13 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Subject = $mailSub;
+    $mail->Body    = $mailMsg;
+    $mail->AltBody = $mailMsg;
 
     $mail->send();
+
+
     echo 'Message has been sent';
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
